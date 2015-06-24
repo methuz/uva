@@ -1,28 +1,33 @@
 #include <stdio.h>
+#include <math.h>
 
-int p(int n) {
-   if (n == 1) {
-       return 1;
-   }
+int max_cycle(int n);
+int main() {
+    int l, u;
+    while (scanf("%d %d", &l, &u)) {
+        int max = 0;
+        int i;
+        for (i = l; i <= u ; i++) {
+            int max_cycle_of_i = max_cycle(i);
+            if (max_cycle_of_i > max)
+                max = max_cycle_of_i;
+        }
 
-   if (n % 2 == 1) {
-       n = 3 * n + 1;
-   } else {
-       n = n / 2;
-   }
-
-   return 1 + p(n);
+        printf("%d %d %d\n", l, u, max);
+    }
+    
 }
 
-int main() {
-    int max = 0;
-    int max_i = 0;
-    for (int i = 1; i <= 100000; i++) {
-      int current_p = p(i);
-      if (current_p > max) {
-          max = current_p;
-          max_i = i;
-      }
+int max_cycle(int n) {
+    int count = 1;
+    while (n > 1) {
+        count += 1;
+        if (n % 2 == 0) {
+            n = n / 2;
+        } else {
+            n = 3 * n + 1;
+        }
     }
-    printf("max = %d, max_i = %d", max, max_i);
+
+    return count;
 }
