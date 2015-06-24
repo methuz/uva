@@ -3,14 +3,16 @@
 
 int max_cycle(int n);
 int main() {
-    int l, u;
+    int l, u, i;
+    int r[1000001] = {0};
+    for (i = 1; i <= 1000000 ; i++) {
+        r[i] = max_cycle(i);
+    }
     while (scanf("%d %d", &l, &u)) {
         int max = 0;
-        int i;
         for (i = l; i <= u ; i++) {
-            int max_cycle_of_i = max_cycle(i);
-            if (max_cycle_of_i > max)
-                max = max_cycle_of_i;
+            if (r[i] > max)
+                max = r[i];
         }
 
         printf("%d %d %d\n", l, u, max);
